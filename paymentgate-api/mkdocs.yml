@@ -1,0 +1,89 @@
+site_name: API Documentation
+
+nav:
+  - 'API Documentation': index.md
+  - v1:
+      - Payment(Payment page):
+        - 'Create payment': v1/payments/create_payment.md
+        - 'Payment info': v1/payments/payment_info.md
+        - 'Payment info by endpoint id': v1/payments/payment_info_by_endpoint_id.md
+        - 'Info on available providers for payments': v1/payments/info_on_available_provider_for_payments.md
+        - 'Structure of payment callback requests': v1/payments/structure_of_payment_callback_requests.md
+  - v2:
+      - Payment:
+        - Card:
+          - 'Create payment': v2/payment/card/create.md
+          - 'Payment info': v2/payment/card/info.md
+          - 'Payment info by endpoint id': v2/payment/card/info_by_endpoint_id.md
+          - 'Info on available providers for payments': v2/payment/card/info_on_available_provider.md
+        - Wallet:
+          - 'Create payment': v2/payment/wallet/create.md
+          - 'Payment info': v2/payment/wallet/info.md
+          - 'Payment info by endpoint id': v2/payment/wallet/info_by_endpoint_id.md
+          - 'Info on available providers for payments': v2/payment/wallet/info_on_available_provider.md
+      - Payout:
+          - Card:
+              - 'Create payout': v2/payout/card/create.md
+              - 'Payout info': v2/payout/card/info.md
+              - 'Payout info by endpoint id': v2/payout/card/info_by_endpoint_id.md
+              - 'Info on available providers for payouts': v2/payout/card/info_on_available_provider.md
+          - Wallet:
+              - 'Create payout': v2/payout/wallet/create.md
+              - 'Payout info': v2/payout/wallet/info.md
+              - 'Payout info by endpoint id': v2/payout/wallet/info_by_endpoint_id.md
+              - 'Info on available providers for payouts': v2/payout/wallet/info_on_available_provider.md
+  - India:
+      - Payment:
+          - FTD:
+              - Wallet:
+                  - 'Create payment': india/payment/ftd/wallet/create.md
+                  - 'Payment info': india/payment/ftd/wallet/info.md
+                  - 'Payment info by endpoint id': india/payment/ftd/wallet/info_by_endpoint_id.md
+                  - 'Info on available providers for payments': india/payment/ftd/wallet/info_on_available_provider.md
+          - Trusted:
+              - Wallet:
+                  - 'Create payment': india/payment/trusted/wallet/create.md
+                  - 'Payment info': india/payment/trusted/wallet/info.md
+                  - 'Payment info by endpoint id': india/payment/trusted/wallet/info_by_endpoint_id.md
+                  - 'Info on available providers for payments': india/payment/trusted/wallet/info_on_available_provider.md
+          - VIP Trusted:
+              - Wallet:
+                  - 'Create payment': india/payment/vip_trusted/wallet/create.md
+                  - 'Payment info': india/payment/vip_trusted/wallet/info.md
+                  - 'Payment info by endpoint id': india/payment/vip_trusted/wallet/info_by_endpoint_id.md
+                  - 'Info on available providers for payments': india/payment/vip_trusted/wallet/info_on_available_provider.md
+      - Payout:
+          - Wallet:
+              - 'Create payout': india/payout/wallet/create.md
+              - 'Payout info': india/payout/wallet/info.md
+              - 'Payout info by endpoint id': india/payout/wallet/info_by_endpoint_id.md
+              - 'Info on available providers for payouts': india/payout/wallet/info_on_available_provider.md
+  - Colombia:
+      - Payment:
+          - Wallet:
+              - 'Create payment': colombia/payment/wallet/create.md
+              - 'Payment info': colombia/payment/wallet/info.md
+              - 'Payment info by endpoint id': colombia/payment/wallet/info_by_endpoint_id.md
+              - 'Info on available providers for payments': colombia/payment/wallet/info_on_available_provider.md
+      - Payout:
+          - Wallet:
+              - 'Create payout': colombia/payout/wallet/create.md
+              - 'Payout info': colombia/payout/wallet/info.md
+              - 'Payout info by endpoint id': colombia/payout/wallet/info_by_endpoint_id.md
+              - 'Info on available providers for payouts': colombia/payout/wallet/info_on_available_provider.md
+
+  - Turkey:
+      - Payment:
+          - Wallet:
+              - 'Create payment': turkey/payment/wallet/create.md
+              - 'Payment info': turkey/payment/wallet/info.md
+              - 'Payment info by endpoint id': turkey/payment/wallet/info_by_endpoint_id.md
+              - 'Info on available providers for payments': turkey/payment/wallet/info_on_available_provider.md
+      - Payout:
+          - Wallet:
+              - 'Create payout': turkey/payout/wallet/create.md
+              - 'Payout info': turkey/payout/wallet/info.md
+              - 'Payout info by endpoint id': turkey/payout/wallet/info_by_endpoint_id.md
+              - 'Info on available providers for payouts': turkey/payout/wallet/info_on_available_provider.md
+theme:
+  name: material

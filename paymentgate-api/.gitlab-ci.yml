@@ -1,0 +1,73 @@
+stages:
+  - build
+  - deploy
+  - rollback
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "test"
+      variables:
+        ENVIRONMENT: "test"
+        DIR: "/srv/gitlab-runner/payplanet/docs/paymentgate-api"
+        SERVER: "payplanet-backend-test"
+    - if: $CI_COMMIT_BRANCH == "master"
+      variables:
+        ENVIRONMENT: "prod"
+        DIR: "/srv/gitlab-runner/payplanet/docs/paymentgate-api"
+        SERVER: "payplanet-backend-prod"
+
+
+.build_job:
+  environment:
+    name: $ENVIRONMENT
+  tags:
+    - $SERVER
+  script:
+    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"-1001619168478\", \"text\": \"Старт обновления окружения $ENVIRONMENT проекта $CI_PROJECT_NAME.\"}" https://api.telegram.org/bot6093139335:AAG1nn-jHP38tPCecpmUnapQLqtkojlHbfM/sendMessage'
+    - mkdir -p $DIR/paymentgate-api-$CI_PIPELINE_ID/
+    - cp -r * $DIR/paymentgate-api-$CI_PIPELINE_ID/
+    - python3.10 -m venv $DIR/paymentgate-api-$CI_PIPELINE_ID/venv
+    - $DIR/paymentgate-api-$CI_PIPELINE_ID/venv/bin/pip install -r requirements.txt
+
+.deploy_job:
+  environment:
+    name: $ENVIRONMENT
+  tags:
+    - $SERVER
+  script:
+    - cd $DIR/paymentgate-api-$CI_PIPELINE_ID/
+    - $DIR/paymentgate-api-$CI_PIPELINE_ID/venv/bin/mkdocs build
+
+    - test -e $DIR/current && mv $DIR/current $DIR/current-$CI_PIPELINE_ID
+
+    - ln -sf $DIR/paymentgate-api-$CI_PIPELINE_ID/ $DIR/current
+
+    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"-1001619168478\", \"text\": \"Окружение $ENVIRONMENT проекта $CI_PROJECT_NAME успешно выгружено.\"}" https://api.telegram.org/bot6093139335:AAG1nn-jHP38tPCecpmUnapQLqtkojlHbfM/sendMessage'
+
+.rollback_job:
+  environment:
+    name: $ENVIRONMENT
+  tags:
+    - $SERVER
+  script:
+    - rm $DIR/current
+    - ln -sf $DIR/current-$CI_PIPELINE_ID/ $DIR/current
+
+build:
+  stage: build
+  extends:
+    - .build_job
+
+deploy:
+  stage: deploy
+  needs: [ build ]
+  extends:
+    - .deploy_job
+  when: on_success
+
+rollback:
+  stage: rollback
+  needs: [ deploy ]
+  extends:
+    - .rollback_job
+  when: manual
